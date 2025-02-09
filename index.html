@@ -40,10 +40,15 @@
             <!-- Hero Section -->
             <section class="hero-section">
                 <h2 class="cyber-glitch">Explore o Universo Cripto</h2>
-                <div class="fear-greed-meter">
-                    <div class="meter-label">Índice Medo & Ganância</div>
-                    <div class="meter-value" id="fearGreedValue">--</div>
-                    <div class="meter-gauge" id="fearGreedGauge"></div>
+                <div class="fear-greed-card">
+                    <h2>ÍNDICE MEDO & GANÂNCIA</h2>
+                    <div class="gauge-container">
+                        <div class="gauge">
+                            <div class="gauge-fill"></div>
+                            <div class="gauge-cover">--</div>
+                        </div>
+                    </div>
+                    <p class="fear-greed-status">Carregando...</p>
                 </div>
             </section>
 
@@ -51,7 +56,7 @@
             <section id="radar" class="market-section">
                 <h2 class="section-title">Radar Cripto</h2>
                 <div class="cards-grid">
-                    <div class="cyber-card" data-category="ai">
+                    <div class="cyber-card" data-category="ai" id="ai-blockchain-card">
                         <div class="card-header">
                             <i class="fas fa-robot"></i>
                             <h3>IA & Blockchain</h3>
@@ -62,7 +67,32 @@
                         </div>
                     </div>
 
-                    <div class="cyber-card" data-category="rwa">
+                    <!-- Modal de IA & Blockchain -->
+                    <div class="crypto-modal" id="ai-blockchain-modal">
+                        <div class="modal-content">
+                            <span class="close-modal">&times;</span>
+                            <h2>Top 50 Criptos de IA & Blockchain</h2>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nome</th>
+                                            <th>Preço</th>
+                                            <th>Variação 24h</th>
+                                            <th>Market Cap</th>
+                                            <th>Volume 24h</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="crypto-table">
+                                        <tr><td colspan="6">Carregando dados...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card" data-category="rwa" id="rwa-card">
                         <div class="card-header">
                             <i class="fas fa-building"></i>
                             <h3>Real World Assets</h3>
@@ -70,6 +100,31 @@
                         <div class="card-content">
                             <p class="card-description">Tokens lastreados em ativos reais</p>
                             <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+
+                    <!-- Modal de Real World Assets -->
+                    <div class="crypto-modal" id="rwa-modal">
+                        <div class="modal-content">
+                            <span class="close-modal">&times;</span>
+                            <h2>Top 50 Criptos de Real World Assets (RWA)</h2>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nome</th>
+                                            <th>Preço</th>
+                                            <th>Variação 24h</th>
+                                            <th>Market Cap</th>
+                                            <th>Volume 24h</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="rwa-table">
+                                        <tr><td colspan="6">Carregando dados...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 

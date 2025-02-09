@@ -168,30 +168,266 @@ const UI = {
     },
 
     updateFearGreedIndex(data) {
-        const valueElement = document.getElementById('fearGreedValue');
-        const gaugeElement = document.getElementById('fearGreedGauge');
+        const card = document.querySelector('.fear-greed-card');
+        const gaugeCover = card.querySelector('.gauge-cover');
+        const gaugeStatus = card.querySelector('.fear-greed-status');
+        const gaugeFill = card.querySelector('.gauge-fill');
         
         if (!data) {
-            valueElement.textContent = 'N/A';
+            gaugeCover.textContent = '--';
+            gaugeStatus.textContent = 'Erro ao carregar dados';
             return;
         }
 
-        valueElement.textContent = data.value;
+        const value = parseInt(data.value);
+        gaugeCover.textContent = value;
         
-        // Update gauge color based on value
-        let color;
-        if (data.value <= 20) color = '#FF0000';      // Extreme Fear
-        else if (data.value <= 40) color = '#FF8C00';  // Fear
-        else if (data.value <= 60) color = '#FFD700';  // Neutral
-        else if (data.value <= 80) color = '#90EE90';  // Greed
-        else color = '#008000';                        // Extreme Greed
-
-        gaugeElement.style.setProperty('--gauge-value', `${data.value}%`);
-        gaugeElement.style.setProperty('--gauge-color', color);
+        // Calcula a rotação do medidor (180 graus é o máximo para o semicírculo)
+        const rotation = (value / 100) * 180;
+        gaugeFill.style.transform = `rotate(${rotation}deg)`;
+        
+        // Define o status e a cor com base no índice
+        let status = '';
+        let statusClass = '';
+        let emoji = '';
+        
+        if (value <= 20) {
+            status = 'Medo Extremo';
+            statusClass = 'status-extreme-fear';
+            emoji = '😨';
+        } else if (value <= 40) {
+            status = 'Medo';
+            statusClass = 'status-fear';
+            emoji = '😟';
+        } else if (value <= 60) {
+            status = 'Neutro';
+            statusClass = 'status-neutral';
+            emoji = '😐';
+        } else if (value <= 80) {
+            status = 'Ganância';
+            statusClass = 'status-greed';
+            emoji = '🤑';
+        } else {
+            status = 'Ganância Extrema';
+            statusClass = 'status-extreme-greed';
+            emoji = '🚀';
+        }
+        
+        gaugeStatus.textContent = `${status} ${emoji}`;
+        gaugeStatus.className = `fear-greed-status ${statusClass}`;
     },
 
     updateLastUpdateTime() {
         state.lastUpdate = new Date();
+    }
+};
+
+// Modal de IA & Blockchain
+const aiBlockchainModal = {
+    modal: null,
+    card: null,
+    closeBtn: null,
+    updateInterval: null,
+
+    init() {
+        this.modal = document.getElementById('ai-blockchain-modal');
+        this.card = document.getElementById('ai-blockchain-card');
+        this.closeBtn = this.modal.querySelector('.close-modal');
+        
+        // Event Listeners
+        this.card.addEventListener('click', () => this.openModal());
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        window.addEventListener('click', (e) => {
+            if (e.target === this.modal) this.closeModal();
+        });
+
+        // Inicializa a atualização automática
+        this.startAutoUpdate();
+    },
+
+    async openModal() {
+        this.modal.style.display = 'flex';
+        await this.fetchAIBlockchainData();
+    },
+
+    closeModal() {
+        this.modal.style.display = 'none';
+    },
+
+    startAutoUpdate() {
+        // Atualiza a cada 10 minutos
+        this.updateInterval = setInterval(() => {
+            if (this.modal.style.display === 'flex') {
+                this.fetchAIBlockchainData();
+            }
+        }, 600000);
+    },
+
+    async fetchAIBlockchainData() {
+        try {
+            const response = await fetch(
+                `${CONFIG.COINGECKO_API}/coins/markets?vs_currency=usd&category=ai-big-data&order=market_cap_desc&per_page=50&page=1&sparkline=false`
+            );
+            
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            
+            this.updateTable(data);
+        } catch (error) {
+            console.error('Erro ao buscar dados de IA & Blockchain:', error);
+            document.getElementById('crypto-table').innerHTML = `
+                <tr>
+                    <td colspan="6">Erro ao carregar dados. Tente novamente mais tarde.</td>
+                </tr>
+            `;
+        }
+    },
+
+    updateTable(data) {
+        const tableBody = document.getElementById('crypto-table');
+        tableBody.innerHTML = '';
+
+        data.forEach((crypto, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>
+                    <img src="${crypto.image}" alt="${crypto.name}" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+                    ${crypto.name} (${crypto.symbol.toUpperCase()})
+                </td>
+                <td>$${crypto.current_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 8 })}</td>
+                <td class="${crypto.price_change_percentage_24h >= 0 ? 'positive-change' : 'negative-change'}">
+                    ${crypto.price_change_percentage_24h.toFixed(2)}%
+                </td>
+                <td>$${(crypto.market_cap / 1e9).toFixed(2)}B</td>
+                <td>$${(crypto.total_volume / 1e6).toFixed(2)}M</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+};
+
+// Modal de Real World Assets
+const rwaModal = {
+    modal: null,
+    card: null,
+    closeBtn: null,
+    updateInterval: null,
+
+    init() {
+        this.modal = document.getElementById('rwa-modal');
+        this.card = document.getElementById('rwa-card');
+        this.closeBtn = this.modal.querySelector('.close-modal');
+        
+        // Event Listeners
+        this.card.addEventListener('click', () => this.openModal());
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        window.addEventListener('click', (e) => {
+            if (e.target === this.modal) this.closeModal();
+        });
+
+        // Inicializa a atualização automática
+        this.startAutoUpdate();
+    },
+
+    async openModal() {
+        this.modal.style.display = 'flex';
+        await this.fetchRWAData();
+    },
+
+    closeModal() {
+        this.modal.style.display = 'none';
+    },
+
+    startAutoUpdate() {
+        // Atualiza a cada 10 minutos
+        this.updateInterval = setInterval(() => {
+            if (this.modal.style.display === 'flex') {
+                this.fetchRWAData();
+            }
+        }, 600000);
+    },
+
+    async fetchRWAData() {
+        try {
+            const response = await fetch(
+                `${CONFIG.COINGECKO_API}/coins/markets?vs_currency=usd&category=real-world-assets&order=market_cap_desc&per_page=50&page=1&sparkline=false`
+            );
+            
+            if (!response.ok) {
+                throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error("Nenhuma criptomoeda encontrada na categoria RWA.");
+            }
+            
+            this.updateTable(data);
+        } catch (error) {
+            console.error('Erro ao buscar dados de Real World Assets:', error);
+            document.getElementById('rwa-table').innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        <div style="color: #ff4444; padding: 1rem;">
+                            Erro ao carregar dados. Tente novamente mais tarde.<br>
+                            <small>${error.message}</small>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+    },
+
+    updateTable(data) {
+        const tableBody = document.getElementById('rwa-table');
+        tableBody.innerHTML = '';
+
+        data.forEach((crypto, index) => {
+            const row = document.createElement('tr');
+            
+            // Formata os números para melhor legibilidade
+            const price = crypto.current_price.toLocaleString('en-US', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 8 
+            });
+            
+            const marketCap = crypto.market_cap >= 1e9 
+                ? `${(crypto.market_cap / 1e9).toFixed(2)}B` 
+                : `${(crypto.market_cap / 1e6).toFixed(2)}M`;
+                
+            const volume = crypto.total_volume >= 1e9 
+                ? `${(crypto.total_volume / 1e9).toFixed(2)}B` 
+                : `${(crypto.total_volume / 1e6).toFixed(2)}M`;
+
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>
+                    <img src="${crypto.image}" alt="${crypto.name}" width="20" height="20" 
+                         style="vertical-align: middle; margin-right: 8px;">
+                    ${crypto.name} 
+                    <span style="color: #888; font-size: 0.9em;">${crypto.symbol.toUpperCase()}</span>
+                </td>
+                <td>$${price}</td>
+                <td class="${crypto.price_change_percentage_24h >= 0 ? 'positive-change' : 'negative-change'}">
+                    ${crypto.price_change_percentage_24h ? crypto.price_change_percentage_24h.toFixed(2) + '%' : 'N/A'}
+                </td>
+                <td>$${marketCap}</td>
+                <td>$${volume}</td>
+            `;
+            
+            // Adiciona hover effect na linha
+            row.style.transition = 'background-color 0.3s ease';
+            row.addEventListener('mouseenter', () => {
+                row.style.backgroundColor = 'rgba(0, 102, 255, 0.1)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.backgroundColor = '';
+            });
+            
+            tableBody.appendChild(row);
+        });
     }
 };
 
@@ -224,6 +460,12 @@ document.addEventListener('DOMContentLoaded', () => {
         "allow_symbol_change": true,
         "container_id": "technicalChart"
     });
+
+    // Initialize AI & Blockchain modal
+    aiBlockchainModal.init();
+
+    // Initialize RWA modal
+    rwaModal.init();
 });
 
 // Main update function

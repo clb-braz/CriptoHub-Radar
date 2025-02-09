@@ -508,4 +508,203 @@ body:hover .glow-effect {
     .main-container {
         padding: 0 1rem;
     }
+}
+
+/* Fear & Greed Card */
+.fear-greed-card {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    margin: 2rem auto;
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.6);
+    transition: transform 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+
+.fear-greed-card:hover {
+    transform: scale(1.05);
+}
+
+.fear-greed-card h2 {
+    color: var(--accent-blue);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
+}
+
+.gauge-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.gauge {
+    width: 150px;
+    height: 75px;
+    background: linear-gradient(to right, 
+        #FF0000 0%,    /* Medo Extremo */
+        #FF8C00 25%,   /* Medo */
+        #FFD700 50%,   /* Neutro */
+        #90EE90 75%,   /* Ganância */
+        #008000 100%   /* Ganância Extrema */
+    );
+    border-radius: 75px 75px 0 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.gauge-fill {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    transform-origin: bottom;
+    transform: rotate(0deg);
+    transition: transform 1s ease-in-out;
+}
+
+.gauge-cover {
+    width: 90px;
+    height: 45px;
+    background: rgba(20, 20, 20, 0.95);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 75px 75px 0 0;
+    text-align: center;
+    line-height: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+}
+
+.fear-greed-status {
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Status colors */
+.status-extreme-fear { color: #FF0000; text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+.status-fear { color: #FF8C00; text-shadow: 0 0 10px rgba(255, 140, 0, 0.5); }
+.status-neutral { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+.status-greed { color: #90EE90; text-shadow: 0 0 10px rgba(144, 238, 144, 0.5); }
+.status-extreme-greed { color: #008000; text-shadow: 0 0 10px rgba(0, 128, 0, 0.5); }
+
+/* Modal de IA & Blockchain */
+.crypto-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 30px var(--accent-blue-glow);
+    border: 1px solid var(--accent-blue);
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.table-container {
+    max-height: calc(90vh - 150px);
+    overflow-y: auto;
+    margin-top: 20px;
+    padding-right: 10px;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 4px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: var(--accent-blue);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--neon-red);
+    text-shadow: 0 0 10px var(--neon-red);
+}
+
+.modal-content h2 {
+    color: var(--accent-blue);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+.modal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.modal-content th {
+    background: rgba(0, 102, 255, 0.2);
+    color: var(--accent-blue);
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-blue);
+}
+
+.modal-content td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+    transition: background 0.3s ease;
+}
+
+.modal-content tr:hover td {
+    background: rgba(0, 102, 255, 0.05);
+}
+
+.positive-change {
+    color: #00ff00;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.negative-change {
+    color: #ff0000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 } 
