@@ -3,54 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CriptoHub Radar - Monitoramento avançado do mercado cripto">
-    <title>CriptoHub Radar</title>
+    <meta name="description" content="CryptoHub Radar - Monitoramento avançado do mercado cripto">
+    <title>CryptoHub Radar</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="src/styles/style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/styles/style.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <h1>CriptoHub Radar</h1>
-            </div>
-            <div class="nav-links">
-                <a href="#dashboard">Dashboard</a>
-                <a href="#mercado">Mercado</a>
-                <a href="#analise">Análise</a>
-                <a href="#portfolio">Portfólio</a>
-            </div>
-        </nav>
-    </header>
+    <!-- Matrix Background Effect -->
+    <canvas id="matrix-effect"></canvas>
 
-    <main class="main-container">
-        <section id="dashboard" class="dashboard-section">
-            <h2>Dashboard</h2>
-            <div class="widgets-container">
-                <!-- Widgets serão adicionados aqui -->
-            </div>
-        </section>
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <header class="header">
+            <nav class="nav-container">
+                <div class="logo">
+                    <h1 class="glitch" data-text="CryptoHub">CryptoHub<span class="radar-text">Radar</span></h1>
+                </div>
+                <div class="nav-links">
+                    <a href="#radar" class="neon-link">Radar Cripto</a>
+                    <a href="#analises" class="neon-link">Análises</a>
+                    <a href="#recursos" class="neon-link">Recursos</a>
+                </div>
+            </nav>
+        </header>
 
-        <section id="mercado" class="market-section">
-            <h2>Mercado</h2>
-            <div class="market-data">
-                <!-- Dados do mercado serão carregados aqui -->
-            </div>
-        </section>
-    </main>
+        <main class="main-container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h2 class="cyber-glitch">Explore o Universo Cripto</h2>
+                <p class="cyber-text">Monitore. Analise. Decida.</p>
+                <div class="fear-greed-meter">
+                    <div class="meter-label">Índice Medo & Ganância</div>
+                    <div class="meter-value" id="fearGreedValue">--</div>
+                    <div class="meter-gauge" id="fearGreedGauge"></div>
+                </div>
+            </section>
 
-    <footer class="footer">
-        <p>&copy; 2024 CriptoHub Radar. Todos os direitos reservados.</p>
-    </footer>
+            <!-- Market Cards Section -->
+            <section id="radar" class="market-section">
+                <h2 class="section-title">Radar Cripto</h2>
+                <div class="cards-grid">
+                    <div class="cyber-card" data-category="ai">
+                        <div class="card-header">
+                            <i class="fas fa-robot"></i>
+                            <h3>IA & Blockchain</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card" data-category="rwa">
+                        <div class="card-header">
+                            <i class="fas fa-building"></i>
+                            <h3>Real World Assets</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card" data-category="defi">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>DeFi</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card" data-category="staking">
+                        <div class="card-header">
+                            <i class="fas fa-piggy-bank"></i>
+                            <h3>Staking</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card" data-category="gems">
+                        <div class="card-header">
+                            <i class="fas fa-gem"></i>
+                            <h3>Gemas & Low Caps</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card" data-category="memes">
+                        <div class="card-header">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Memecoins</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="loading-data">Carregando dados...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Section -->
+            <section id="analises" class="analysis-section">
+                <h2 class="section-title">Análises Avançadas</h2>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>Análise Técnica</h3>
+                        <div id="technicalChart" class="chart-container">
+                            <!-- TradingView Widget será inserido aqui -->
+                        </div>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>Métricas On-Chain</h3>
+                        <div id="onchainMetrics" class="metrics-container">
+                            <!-- Métricas on-chain serão inseridas aqui -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 CryptoHub Radar | Powered by <a href="#" class="neon-link">Blockchain Technology</a></p>
+            </div>
+        </footer>
+    </div>
 
     <!-- JavaScript -->
+    <script src="src/scripts/matrix.js"></script>
     <script src="src/scripts/main.js"></script>
+    <!-- TradingView Widget -->
+    <script src="https://s3.tradingview.com/tv.js"></script>
 </body>
 </html> 
