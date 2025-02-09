@@ -13,22 +13,36 @@ setCanvasSize();
 window.addEventListener('resize', setCanvasSize);
 
 // Characters to use in the matrix rain
-const chars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*()_+-=[]{}|;:/<>~';
 const charArray = chars.split('');
 
 // Rain drops
 const drops = [];
-const fontSize = 14;
+const fontSize = 14; // Tamanho reduzido para mais performance
 const columns = canvas.width / fontSize;
 
-// Initialize drops
+// Initialize drops with posições aleatórias
 for (let i = 0; i < columns; i++) {
-    drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+    drops[i] = {
+        y: Math.random() * -100,
+        speed: 3 + Math.random() * 5, // Velocidade mais alta
+        length: 15 + Math.floor(Math.random() * 15), // Comprimento mais consistente
+        lastChar: 0,
+        chars: []
+    };
 }
 
 // Drawing speed
-const frameRate = 30;
+const frameRate = 60; // FPS máximo
 let lastFrame = 0;
+
+// Color configuration
+const colors = {
+    background: '#000000',
+    primary: '#00FF00',
+    bright: '#FFFFFF',
+    dim: '#008800'
+};
 
 // Main animation function
 function draw(timestamp) {
@@ -38,33 +52,53 @@ function draw(timestamp) {
     }
     lastFrame = timestamp;
 
-    // Semi-transparent black background to create fade effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    // Clear background com preto sólido
+    ctx.fillStyle = colors.background;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Green text
-    ctx.fillStyle = '#0F0';
-    ctx.font = fontSize + 'px monospace';
 
     // Draw characters
     for (let i = 0; i < drops.length; i++) {
-        // Random character
-        const char = charArray[Math.floor(Math.random() * charArray.length)];
+        const drop = drops[i];
         
-        // Calculate position
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
+        // Update drop position
+        drop.y += drop.speed;
+        
+        // Atualiza os caracteres da cauda
+        if (drop.lastChar % 2 === 0) { // Muda caractere mais frequentemente
+            drop.chars.unshift(charArray[Math.floor(Math.random() * charArray.length)]);
+            if (drop.chars.length > drop.length) {
+                drop.chars.pop();
+            }
+        }
+        drop.lastChar++;
 
-        // Draw the character
-        ctx.fillText(char, x, y);
+        // Desenha a cauda de caracteres
+        for (let j = 0; j < drop.chars.length; j++) {
+            const y = drop.y - (j * fontSize);
+            if (y < canvas.height && y > 0) {
+                // Primeiro caractere branco, resto verde
+                if (j === 0) {
+                    ctx.fillStyle = colors.bright;
+                    ctx.font = `bold ${fontSize}px monospace`;
+                } else {
+                    ctx.fillStyle = j < 3 ? colors.primary : colors.dim;
+                    ctx.font = `${fontSize}px monospace`;
+                }
 
-        // Reset drop if it reaches bottom or randomly
-        if (y > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
+                ctx.fillText(drop.chars[j], i * fontSize, y);
+            }
         }
 
-        // Move drop down
-        drops[i]++;
+        // Reset drop when it reaches bottom
+        if (drop.y - (drop.length * fontSize) > canvas.height) {
+            drops[i] = {
+                y: -drop.length * fontSize,
+                speed: 3 + Math.random() * 5,
+                length: 15 + Math.floor(Math.random() * 15),
+                lastChar: 0,
+                chars: []
+            };
+        }
     }
 
     requestAnimationFrame(draw);

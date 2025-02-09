@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,15 +18,15 @@
     <link rel="stylesheet" href="src/styles/style.css">
 </head>
 <body>
-    <!-- Matrix Background Effect -->
-    <canvas id="matrix-effect"></canvas>
+    <!-- Background Elements -->
+    <div class="crypto-icons-bg"></div>
 
     <!-- Main Content -->
     <div class="content-wrapper">
         <header class="header">
             <nav class="nav-container">
                 <div class="logo">
-                    <h1 class="glitch" data-text="CryptoHub">CryptoHub<span class="radar-text">Radar</span></h1>
+                    <h1>Crypto<span>Hub</span> Radar</h1>
                 </div>
                 <div class="nav-links">
                     <a href="#radar" class="neon-link">Radar Cripto</a>
@@ -40,7 +40,6 @@
             <!-- Hero Section -->
             <section class="hero-section">
                 <h2 class="cyber-glitch">Explore o Universo Cripto</h2>
-                <p class="cyber-text">Monitore. Analise. Decida.</p>
                 <div class="fear-greed-meter">
                     <div class="meter-label">Índice Medo & Ganância</div>
                     <div class="meter-value" id="fearGreedValue">--</div>
@@ -58,6 +57,7 @@
                             <h3>IA & Blockchain</h3>
                         </div>
                         <div class="card-content">
+                            <p class="card-description">Projetos que combinam IA e Blockchain</p>
                             <div class="loading-data">Carregando dados...</div>
                         </div>
                     </div>
@@ -68,6 +68,7 @@
                             <h3>Real World Assets</h3>
                         </div>
                         <div class="card-content">
+                            <p class="card-description">Tokens lastreados em ativos reais</p>
                             <div class="loading-data">Carregando dados...</div>
                         </div>
                     </div>
@@ -78,6 +79,7 @@
                             <h3>DeFi</h3>
                         </div>
                         <div class="card-content">
+                            <p class="card-description">Finanças descentralizadas</p>
                             <div class="loading-data">Carregando dados...</div>
                         </div>
                     </div>
@@ -88,6 +90,7 @@
                             <h3>Staking</h3>
                         </div>
                         <div class="card-content">
+                            <p class="card-description">Projetos com staking ativo</p>
                             <div class="loading-data">Carregando dados...</div>
                         </div>
                     </div>
@@ -98,6 +101,7 @@
                             <h3>Gemas & Low Caps</h3>
                         </div>
                         <div class="card-content">
+                            <p class="card-description">Projetos promissores de baixa capitalização</p>
                             <div class="loading-data">Carregando dados...</div>
                         </div>
                     </div>
@@ -108,6 +112,7 @@
                             <h3>Memecoins</h3>
                         </div>
                         <div class="card-content">
+                            <p class="card-description">Tokens baseados em memes</p>
                             <div class="loading-data">Carregando dados...</div>
                         </div>
                     </div>
@@ -135,14 +140,12 @@
         </main>
 
         <footer class="footer">
-            <div class="footer-content">
-                <p>&copy; 2024 CryptoHub Radar | Powered by <a href="#" class="neon-link">Blockchain Technology</a></p>
-            </div>
+            <p>&copy; 2024 CryptoHub Radar | Powered by <a href="#" class="neon-link">Blockchain Technology</a></p>
         </footer>
     </div>
 
     <!-- JavaScript -->
-    <script src="src/scripts/matrix.js"></script>
+    <script src="src/scripts/background.js"></script>
     <script src="src/scripts/main.js"></script>
     <!-- TradingView Widget -->
     <script src="https://s3.tradingview.com/tv.js"></script>

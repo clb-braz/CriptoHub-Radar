@@ -7,21 +7,52 @@ const CONFIG = {
     TOP_COINS_LIMIT: 10
 };
 
-// Category Configurations
+// Category Configurations with icons and descriptions
 const CATEGORIES = {
-    ai: ['ocean-protocol', 'fetch-ai', 'singularitynet', 'numeraire', 'graph'],
-    rwa: ['maker', 'centrifuge', 'ondo-finance', 'real-world-assets', 'tangible'],
-    defi: ['aave', 'uniswap', 'curve-dao-token', 'compound-governance-token', 'maker'],
-    staking: ['ethereum', 'cardano', 'solana', 'polkadot', 'cosmos'],
-    gems: ['injective', 'render-token', 'fetch-ai', 'immutable', 'sui'],
-    memes: ['dogecoin', 'shiba-inu', 'pepe', 'floki', 'bonk']
+    ai: {
+        title: 'IA & Blockchain',
+        icon: 'fa-robot',
+        description: 'Projetos que combinam IA e Blockchain',
+        coins: ['ocean-protocol', 'fetch-ai', 'singularitynet', 'numeraire', 'graph']
+    },
+    rwa: {
+        title: 'Real World Assets',
+        icon: 'fa-building',
+        description: 'Tokens lastreados em ativos reais',
+        coins: ['maker', 'centrifuge', 'ondo-finance', 'real-world-assets', 'tangible']
+    },
+    defi: {
+        title: 'DeFi',
+        icon: 'fa-chart-line',
+        description: 'Finanças descentralizadas',
+        coins: ['aave', 'uniswap', 'curve-dao-token', 'compound-governance-token', 'maker']
+    },
+    staking: {
+        title: 'Staking',
+        icon: 'fa-piggy-bank',
+        description: 'Projetos com staking ativo',
+        coins: ['ethereum', 'cardano', 'solana', 'polkadot', 'cosmos']
+    },
+    gems: {
+        title: 'Gemas & Low Caps',
+        icon: 'fa-gem',
+        description: 'Projetos promissores de baixa capitalização',
+        coins: ['injective', 'render-token', 'fetch-ai', 'immutable', 'sui']
+    },
+    memes: {
+        title: 'Memecoins',
+        icon: 'fa-rocket',
+        description: 'Tokens baseados em memes',
+        coins: ['dogecoin', 'shiba-inu', 'pepe', 'floki', 'bonk']
+    }
 };
 
 // State Management
 const state = {
     marketData: {},
     fearGreedIndex: null,
-    lastUpdate: null
+    lastUpdate: null,
+    activeCard: null
 };
 
 // API Service
@@ -40,6 +71,17 @@ const ApiService = {
         }
     },
 
+    async fetchCoinDetails(coinId) {
+        try {
+            const response = await fetch(`${CONFIG.COINGECKO_API}/coins/${coinId}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching coin details:', error);
+            return null;
+        }
+    },
+
     async fetchFearGreedIndex() {
         try {
             const response = await fetch(CONFIG.FEAR_GREED_API);
@@ -54,7 +96,7 @@ const ApiService = {
 
     async fetchCategoryData(category) {
         try {
-            const coins = CATEGORIES[category].join(',');
+            const coins = CATEGORIES[category].coins.join(',');
             const data = await this.fetchCoinData(coins);
             return data;
         } catch (error) {
@@ -66,7 +108,7 @@ const ApiService = {
 
 // UI Updates
 const UI = {
-    updateCard(category, data) {
+    async updateCard(category, data) {
         const card = document.querySelector(`[data-category="${category}"]`);
         if (!card) return;
 
@@ -76,25 +118,53 @@ const UI = {
             return;
         }
 
-        const coins = CATEGORIES[category];
-        const html = coins.map(coinId => {
+        const categoryInfo = CATEGORIES[category];
+        const coins = categoryInfo.coins;
+        
+        // Create crypto list container
+        const cryptoList = document.createElement('div');
+        cryptoList.className = 'crypto-list';
+
+        // Add coins to the list
+        for (const coinId of coins) {
             const coinData = data[coinId];
-            if (!coinData) return '';
+            if (!coinData) continue;
 
             const price = coinData[CONFIG.DEFAULT_CURRENCY];
             const change = coinData[`${CONFIG.DEFAULT_CURRENCY}_24h_change`];
             const changeClass = change >= 0 ? 'positive-change' : 'negative-change';
 
-            return `
-                <div class="coin-info">
-                    <span class="coin-name">${coinId}</span>
-                    <span class="coin-price">$${price.toLocaleString()}</span>
-                    <span class="coin-change ${changeClass}">${change.toFixed(2)}%</span>
+            // Fetch additional coin details for image
+            const details = await ApiService.fetchCoinDetails(coinId);
+            const image = details?.image?.thumb || '';
+
+            const cryptoItem = document.createElement('div');
+            cryptoItem.className = 'crypto-item';
+            cryptoItem.innerHTML = `
+                <div class="crypto-name">
+                    ${image ? `<img src="${image}" alt="${coinId}">` : ''}
+                    <span>${coinId}</span>
+                </div>
+                <div class="crypto-price">
+                    <span>$${price.toLocaleString()}</span>
+                    <span class="${changeClass}">${change.toFixed(2)}%</span>
                 </div>
             `;
-        }).join('');
+            cryptoList.appendChild(cryptoItem);
+        }
 
-        content.innerHTML = html;
+        // Update card content
+        content.innerHTML = '';
+        content.appendChild(cryptoList);
+
+        // Add click event to card
+        card.addEventListener('click', () => {
+            if (state.activeCard && state.activeCard !== card) {
+                state.activeCard.classList.remove('active');
+            }
+            card.classList.toggle('active');
+            state.activeCard = card;
+        });
     },
 
     updateFearGreedIndex(data) {
@@ -125,8 +195,21 @@ const UI = {
     }
 };
 
-// TradingView Chart
-function initTradingViewWidget() {
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    // Close active card when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.cyber-card') && state.activeCard) {
+            state.activeCard.classList.remove('active');
+            state.activeCard = null;
+        }
+    });
+
+    // Initial data load
+    updateMarketData();
+    setInterval(updateMarketData, CONFIG.REFRESH_INTERVAL);
+
+    // Initialize TradingView widget
     new TradingView.widget({
         "width": "100%",
         "height": 400,
@@ -141,9 +224,9 @@ function initTradingViewWidget() {
         "allow_symbol_change": true,
         "container_id": "technicalChart"
     });
-}
+});
 
-// Main Functions
+// Main update function
 async function updateMarketData() {
     // Update Fear & Greed Index
     const fearGreedData = await ApiService.fetchFearGreedIndex();
@@ -156,15 +239,4 @@ async function updateMarketData() {
     }
 
     UI.updateLastUpdateTime();
-}
-
-function startDataRefresh() {
-    updateMarketData();
-    setInterval(updateMarketData, CONFIG.REFRESH_INTERVAL);
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    startDataRefresh();
-    initTradingViewWidget();
-}); 
+} 
