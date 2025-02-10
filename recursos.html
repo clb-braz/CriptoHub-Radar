@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CryptoHub Radar - Centro de recursos e ferramentas para o mercado cripto">
+    <title>Recursos - CryptoHub Radar</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="crypto-icons-bg"></div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <header class="header">
+            <nav class="nav-container">
+                <div class="logo">
+                    <h1>Crypto<span>Hub</span> Radar</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html#radar" class="neon-link">Radar Cripto</a>
+                    <a href="analises.html" class="neon-link">Análises</a>
+                    <a href="recursos.html" class="neon-link active">Recursos</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h2 class="cyber-glitch">Centro de Recursos</h2>
+                <p class="hero-description">Ferramentas, educação e recursos exclusivos para maximizar seus resultados no mercado cripto</p>
+            </section>
+
+            <!-- Resources Grid -->
+            <section class="resources-grid">
+                <!-- 1. Ferramentas e Calculadoras -->
+                <div class="resource-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-calculator"></i> Ferramentas e Calculadoras</h3>
+                        <div class="premium-tag">
+                            <i class="fas fa-crown"></i> Premium
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tools-grid">
+                            <div class="tool-item">
+                                <i class="fas fa-exchange-alt"></i>
+                                <h4>Conversor Cripto-Fiat</h4>
+                                <p>Converta instantaneamente entre criptomoedas e moedas fiduciárias</p>
+                            </div>
+                            <div class="tool-item">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Calculadora de Lucros</h4>
+                                <p>Calcule seus ganhos com dados históricos precisos</p>
+                            </div>
+                            <div class="tool-item">
+                                <i class="fas fa-coins"></i>
+                                <h4>Simulador de Staking</h4>
+                                <p>Compare rendimentos entre diferentes plataformas</p>
+                            </div>
+                            <div class="tool-item">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                                <h4>Calculadora de Impostos</h4>
+                                <p>Estime suas obrigações tributárias globais</p>
+                            </div>
+                            <div class="tool-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <h4>Análise de Gas Fees</h4>
+                                <p>Monitore taxas em diferentes redes blockchain</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Academia CryptoHub -->
+                <div class="resource-card academy-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-graduation-cap"></i> Academia CryptoHub</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="course-modules">
+                            <div class="module free">
+                                <span class="level-badge free">Iniciante</span>
+                                <h4>Módulo 1 - Fundamentos</h4>
+                                <ul>
+                                    <li>Introdução ao Blockchain</li>
+                                    <li>Segurança em Cripto</li>
+                                    <li>Como Criar Carteiras</li>
+                                </ul>
+                                <a href="#" class="module-button">Começar Grátis</a>
+                            </div>
+                            <div class="module premium">
+                                <span class="level-badge premium">Intermediário</span>
+                                <h4>Módulo 2 - Trading</h4>
+                                <ul>
+                                    <li>Estratégias de Trading</li>
+                                    <li>Análise Fundamentalista</li>
+                                    <li>DeFi e Staking</li>
+                                </ul>
+                                <a href="#" class="premium-button">
+                                    <i class="fas fa-crown"></i> Acessar
+                                </a>
+                            </div>
+                            <div class="module premium">
+                                <span class="level-badge premium">Avançado</span>
+                                <h4>Módulo 3 - Pro</h4>
+                                <ul>
+                                    <li>Arbitragem</li>
+                                    <li>On-Chain Analysis</li>
+                                    <li>Monitoramento de Whales</li>
+                                </ul>
+                                <a href="#" class="premium-button">
+                                    <i class="fas fa-crown"></i> Acessar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Últimas Notícias -->
+                <div class="resource-card news-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-newspaper"></i> Últimas Notícias</h3>
+                        <div class="news-filters">
+                            <button class="active">Todas</button>
+                            <button>Bitcoin</button>
+                            <button>DeFi</button>
+                            <button>Regulação</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="news-feed" id="newsFeed">
+                            <!-- Notícias serão carregadas via JavaScript -->
+                        </div>
+                        <div class="notification-settings">
+                            <h4>Configurar Notificações</h4>
+                            <div class="notification-options">
+                                <!-- Opções de notificação serão carregadas via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Relatórios Profissionais -->
+                <div class="resource-card reports-card premium-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-file-alt"></i> Relatórios Profissionais</h3>
+                        <div class="premium-tag">
+                            <i class="fas fa-crown"></i> Premium
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="reports-grid">
+                            <div class="report-item">
+                                <i class="fas fa-chart-pie"></i>
+                                <h4>Análise Semanal</h4>
+                                <p>Tendências de mercado e dominância BTC/Altcoins</p>
+                                <a href="#" class="premium-button">Download</a>
+                            </div>
+                            <div class="report-item">
+                                <i class="fas fa-project-diagram"></i>
+                                <h4>Mercado DeFi</h4>
+                                <p>Volume, novas plataformas e pools de liquidez</p>
+                                <a href="#" class="premium-button">Download</a>
+                            </div>
+                            <div class="report-item">
+                                <i class="fas fa-whale"></i>
+                                <h4>Whale Report</h4>
+                                <p>Análise das maiores movimentações do mercado</p>
+                                <a href="#" class="premium-button">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Comunidade -->
+                <div class="resource-card community-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-users"></i> Comunidade</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="community-features">
+                            <div class="feature-item">
+                                <span class="level-badge free">Grátis</span>
+                                <i class="fab fa-telegram"></i>
+                                <h4>Canal Telegram</h4>
+                                <p>Receba alertas e atualizações em tempo real sobre o mercado</p>
+                                <a href="#" class="module-button">Entrar no Canal</a>
+                            </div>
+                            <div class="feature-item">
+                                <span class="premium-tag"><i class="fas fa-crown"></i> Premium</span>
+                                <i class="fas fa-comments"></i>
+                                <h4>Grupo VIP</h4>
+                                <p>Discussões exclusivas e análises detalhadas com nossa equipe</p>
+                                <a href="#" class="premium-button">
+                                    <i class="fas fa-crown"></i> Acessar
+                                </a>
+                            </div>
+                            <div class="feature-item">
+                                <span class="premium-tag"><i class="fas fa-crown"></i> Premium</span>
+                                <i class="fas fa-video"></i>
+                                <h4>Lives Exclusivas</h4>
+                                <p>Webinars semanais com traders profissionais e especialistas</p>
+                                <a href="#" class="premium-button">
+                                    <i class="fas fa-crown"></i> Participar
+                                </a>
+                            </div>
+                            <div class="feature-item">
+                                <span class="premium-tag"><i class="fas fa-crown"></i> Premium</span>
+                                <i class="fas fa-signal"></i>
+                                <h4>Sinais Premium</h4>
+                                <p>Receba sinais de trading verificados em primeira mão</p>
+                                <a href="#" class="premium-button">
+                                    <i class="fas fa-crown"></i> Ativar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Segurança -->
+                <div class="resource-card security-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-shield-alt"></i> Segurança</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="security-tools">
+                            <div class="tool-item">
+                                <i class="fas fa-clipboard-check"></i>
+                                <h4>Checklist de Segurança</h4>
+                                <p>Verifique a proteção de suas carteiras</p>
+                                <button class="action-button">Verificar</button>
+                            </div>
+                            <div class="tool-item">
+                                <i class="fas fa-search-dollar"></i>
+                                <h4>Scanner de Contratos</h4>
+                                <p>Análise de segurança de smart contracts</p>
+                                <button class="action-button">Analisar</button>
+                            </div>
+                            <div class="tool-item">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h4>Alerta de Scams</h4>
+                                <p>Monitoramento de golpes em tempo real</p>
+                                <button class="action-button">Ativar Alertas</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Estratégias -->
+                <div class="resource-card strategies-card premium-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chess"></i> Estratégias Avançadas</h3>
+                        <div class="premium-tag">
+                            <i class="fas fa-crown"></i> Premium
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="strategies-grid">
+                            <div class="strategy-item">
+                                <h4>DCA (Dollar Cost Averaging)</h4>
+                                <p>Investimento sistemático para reduzir volatilidade</p>
+                                <a href="#" class="premium-button">Ler E-book</a>
+                            </div>
+                            <div class="strategy-item">
+                                <h4>Trading Styles</h4>
+                                <p>Comparativo entre Day Trade e Swing Trade</p>
+                                <a href="#" class="premium-button">Ler E-book</a>
+                            </div>
+                            <div class="strategy-item">
+                                <h4>Gem Hunting</h4>
+                                <p>Como encontrar projetos promissores</p>
+                                <a href="#" class="premium-button">Ler E-book</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. API & Automação -->
+                <div class="resource-card api-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-code"></i> API & Automação</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="api-options">
+                            <div class="api-tier free">
+                                <h4>API Gratuita</h4>
+                                <ul>
+                                    <li>Preços de ativos</li>
+                                    <li>Volume de mercado</li>
+                                    <li>Dominância BTC</li>
+                                </ul>
+                                <button class="action-button">Documentação</button>
+                            </div>
+                            <div class="api-tier premium">
+                                <h4>API Premium</h4>
+                                <ul>
+                                    <li>Métricas On-Chain</li>
+                                    <li>Dados de liquidez</li>
+                                    <li>Integração com bots</li>
+                                </ul>
+                                <a href="#" class="premium-button">
+                                    <i class="fas fa-crown"></i> Acessar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Premium -->
+                <div class="resource-card premium-upgrade-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-crown"></i> Upgrade Premium</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="premium-plans">
+                            <div class="plan-comparison">
+                                <div class="plan free">
+                                    <h4>Gratuito</h4>
+                                    <ul>
+                                        <li>Acesso básico ao Radar</li>
+                                        <li>Módulo 1 da Academia</li>
+                                        <li>API básica</li>
+                                    </ul>
+                                </div>
+                                <div class="plan premium">
+                                    <h4>Premium</h4>
+                                    <ul>
+                                        <li>Todas as ferramentas</li>
+                                        <li>Academia completa</li>
+                                        <li>Relatórios exclusivos</li>
+                                        <li>Suporte 24/7</li>
+                                    </ul>
+                                    <div class="plan-cta">
+                                        <a href="#" class="premium-button">
+                                            <i class="fas fa-crown"></i> Assinar Premium
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 CryptoHub Radar | Powered by <a href="#" class="neon-link">Blockchain Technology</a></p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="src/scripts/background.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/resources.js"></script>
+</body>
+</html> 

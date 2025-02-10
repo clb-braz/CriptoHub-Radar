@@ -291,19 +291,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Technical Analysis
     function initTechnicalAnalysis() {
-        new TradingView.widget({
-            "width": "100%",
-            "height": "100%",
+        const technicalChart = new TradingView.widget({
+            "container_id": "technicalChart",
+            "autosize": true,
             "symbol": "BINANCE:BTCUSDT",
             "interval": "D",
-            "timezone": "Etc/UTC",
+            "timezone": "America/Sao_Paulo",
             "theme": "dark",
             "style": "1",
             "locale": "br",
-            "toolbar_bg": "#f1f3f6",
+            "toolbar_bg": "#1a1a1a",
             "enable_publishing": false,
+            "hide_side_toolbar": false,
             "allow_symbol_change": true,
-            "container_id": "technicalChart",
             "studies": [
                 "MASimple@tv-basicstudies",
                 "RSI@tv-basicstudies",
@@ -317,6 +317,38 @@ document.addEventListener("DOMContentLoaded", function () {
                 this.classList.toggle('active');
                 // Here you would toggle the respective indicator on the TradingView chart
             });
+        });
+
+        // Controles de expansão do gráfico
+        document.getElementById('expandChart').addEventListener('click', () => {
+            const container = document.querySelector('.chart-container');
+            const expandBtn = document.getElementById('expandChart');
+            const minimizeBtn = document.getElementById('minimizeChart');
+            
+            container.classList.add('expanded');
+            expandBtn.style.display = 'none';
+            minimizeBtn.style.display = 'block';
+            
+            // Atualiza o tamanho do gráfico
+            technicalChart.resize();
+        });
+
+        document.getElementById('minimizeChart').addEventListener('click', () => {
+            const container = document.querySelector('.chart-container');
+            const expandBtn = document.getElementById('expandChart');
+            const minimizeBtn = document.getElementById('minimizeChart');
+            
+            container.classList.remove('expanded');
+            expandBtn.style.display = 'block';
+            minimizeBtn.style.display = 'none';
+            
+            // Atualiza o tamanho do gráfico
+            technicalChart.resize();
+        });
+
+        // Atualiza o tamanho do gráfico quando a janela é redimensionada
+        window.addEventListener('resize', () => {
+            technicalChart.resize();
         });
     }
 
@@ -491,4 +523,39 @@ document.addEventListener("DOMContentLoaded", function () {
             feed.appendChild(div);
         });
     }
+
+    function expandChart() {
+        const container = document.getElementById('mainChartContainer');
+        const expandBtn = container.querySelector('.expand-btn');
+        
+        if (container.classList.contains('expanded')) {
+            container.classList.remove('expanded');
+            expandBtn.innerHTML = '<i class="fas fa-expand"></i>';
+            document.body.style.overflow = 'auto';
+        } else {
+            container.classList.add('expanded');
+            expandBtn.innerHTML = '<i class="fas fa-compress"></i>';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Atualiza o tamanho do gráfico após a expansão
+        if (window.TradingView && window.tvWidget) {
+            setTimeout(() => {
+                window.tvWidget.resize(
+                    container.offsetWidth,
+                    container.offsetHeight
+                );
+            }, 300);
+        }
+    }
+
+    // Adiciona listener para tecla ESC fechar o gráfico expandido
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const container = document.getElementById('mainChartContainer');
+            if (container.classList.contains('expanded')) {
+                expandChart();
+            }
+        }
+    });
 }); 

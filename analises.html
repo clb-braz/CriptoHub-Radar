@@ -34,7 +34,7 @@
                 <div class="nav-links">
                     <a href="index.html#radar" class="neon-link">Radar Cripto</a>
                     <a href="analises.html" class="neon-link active">Análises</a>
-                    <a href="#recursos" class="neon-link">Recursos</a>
+                    <a href="recursos.html" class="neon-link">Recursos</a>
                 </div>
             </nav>
         </header>
@@ -48,8 +48,23 @@
 
             <!-- Analysis Grid -->
             <section class="analysis-grid">
+                <!-- Technical Analysis Chart Card -->
+                <div class="analysis-card chart-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Gráfico de Análise Técnica</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container" id="mainChartContainer">
+                            <div id="technicalChart"></div>
+                            <button class="expand-btn" onclick="expandChart()">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Social Sentiment Analysis -->
-                <div class="analysis-card premium-card">
+                <div class="analysis-card">
                     <div class="card-header">
                         <h3><i class="fas fa-hashtag"></i> Análise de Sentimento Social</h3>
                         <div class="premium-tag">
@@ -60,17 +75,17 @@
                         <div class="premium-features">
                             <h4>O que você terá acesso:</h4>
                             <ul>
-                                <li>Painel em tempo real das criptomoedas mais mencionadas em Twitter (X), Reddit e Google Trends</li>
-                                <li>Gráficos de volume mostrando interesse nas últimas 24h, 7 dias e 30 dias</li>
-                                <li>Índice de hype medindo comentários positivos, neutros e negativos</li>
-                                <li>Lista das 10 criptomoedas mais discutidas com links para fóruns e tweets</li>
+                                <li>Painel em tempo real das criptomoedas mais mencionadas</li>
+                                <li>Gráficos de volume de interesse</li>
+                                <li>Índice de hype e sentimento</li>
+                                <li>Top 10 criptos mais discutidas</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Whale Monitoring -->
-                <div class="analysis-card premium-card">
+                <div class="analysis-card">
                     <div class="card-header">
                         <h3><i class="fas fa-whale"></i> Monitoramento de Baleias</h3>
                         <div class="premium-tag">
@@ -81,38 +96,17 @@
                         <div class="premium-features">
                             <h4>O que você terá acesso:</h4>
                             <ul>
-                                <li>Lista das maiores transações de baleias nas últimas 24h</li>
-                                <li>Alertas automáticos de movimentações anômalas</li>
-                                <li>Fluxo de capital entre exchanges</li>
-                                <li>Mapa de calor de acumulação e distribuição</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Technical Analysis -->
-                <div class="analysis-card premium-card expandable">
-                    <div class="card-header">
-                        <h3><i class="fas fa-chart-line"></i> Análise Técnica</h3>
-                        <div class="premium-tag">
-                            <i class="fas fa-crown"></i> Premium
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="premium-features">
-                            <h4>O que você terá acesso:</h4>
-                            <ul>
-                                <li>Gráfico interativo com indicadores personalizáveis (RSI, MACD, Médias Móveis)</li>
-                                <li>Visualização em tela cheia</li>
-                                <li>Comparação entre diferentes criptomoedas</li>
-                                <li>Sugestões de padrões gráficos</li>
+                                <li>Maiores transações nas últimas 24h</li>
+                                <li>Alertas de movimentações anômalas</li>
+                                <li>Fluxo entre exchanges</li>
+                                <li>Mapa de acumulação</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Market Heatmap -->
-                <div class="analysis-card premium-card">
+                <div class="analysis-card">
                     <div class="card-header">
                         <h3><i class="fas fa-fire"></i> Heatmap de Mercado</h3>
                         <div class="premium-tag">
@@ -123,17 +117,17 @@
                         <div class="premium-features">
                             <h4>O que você terá acesso:</h4>
                             <ul>
-                                <li>Mapa de calor de volatilidade em tempo real</li>
-                                <li>Níveis de liquidez nas principais exchanges</li>
-                                <li>Destaques do dia com maiores variações</li>
-                                <li>Ranking das criptos mais líquidas</li>
+                                <li>Mapa de calor em tempo real</li>
+                                <li>Níveis de liquidez por exchange</li>
+                                <li>Maiores variações do dia</li>
+                                <li>Ranking de liquidez</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- DeFi Protocols -->
-                <div class="analysis-card premium-card">
+                <div class="analysis-card">
                     <div class="card-header">
                         <h3><i class="fas fa-money-bill-wave"></i> Ranking DeFi</h3>
                         <div class="premium-tag">
@@ -144,38 +138,17 @@
                         <div class="premium-features">
                             <h4>O que você terá acesso:</h4>
                             <ul>
-                                <li>Top 10 protocolos DeFi por APY</li>
-                                <li>Comparação entre Staking, Yield Farming e Lending</li>
-                                <li>Indicadores de risco e TVL</li>
-                                <li>Acesso direto aos melhores pools</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- New Projects Tracker -->
-                <div class="analysis-card premium-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-rocket"></i> Novos Projetos</h3>
-                        <div class="premium-tag">
-                            <i class="fas fa-crown"></i> Premium
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="premium-features">
-                            <h4>O que você terá acesso:</h4>
-                            <ul>
-                                <li>Lista de ICOs, IDOs e pré-vendas futuras</li>
-                                <li>Informações detalhadas de cada projeto</li>
-                                <li>Alerta de hype e engajamento</li>
-                                <li>Ranking dos ICOs mais aguardados</li>
+                                <li>Top 10 protocolos por APY</li>
+                                <li>Comparativo de yields</li>
+                                <li>Indicadores de risco</li>
+                                <li>Melhores pools</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Market Manipulation -->
-                <div class="analysis-card premium-card">
+                <div class="analysis-card">
                     <div class="card-header">
                         <h3><i class="fas fa-exclamation-triangle"></i> Alertas de Manipulação</h3>
                         <div class="premium-tag">
@@ -186,38 +159,17 @@
                         <div class="premium-features">
                             <h4>O que você terá acesso:</h4>
                             <ul>
-                                <li>Alerta de atividades suspeitas (spoofing, wash trading)</li>
-                                <li>Mapa de liquidez com barreiras falsas</li>
-                                <li>Lista de comportamentos anormais</li>
-                                <li>Nível de manipulação por cripto</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Performance Comparison -->
-                <div class="analysis-card premium-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-balance-scale"></i> Comparativo de Performance</h3>
-                        <div class="premium-tag">
-                            <i class="fas fa-crown"></i> Premium
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="premium-features">
-                            <h4>O que você terá acesso:</h4>
-                            <ul>
-                                <li>Tabela comparativa de variação de preços</li>
-                                <li>Gráfico de comparação múltipla</li>
-                                <li>Correlação entre ativos</li>
-                                <li>Destaques de crescimento e queda</li>
+                                <li>Alertas de atividades suspeitas</li>
+                                <li>Mapa de liquidez</li>
+                                <li>Padrões anormais</li>
+                                <li>Índice de manipulação</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Market Narratives -->
-                <div class="analysis-card premium-card">
+                <div class="analysis-card">
                     <div class="card-header">
                         <h3><i class="fas fa-lightbulb"></i> Narrativas de Mercado</h3>
                         <div class="premium-tag">
@@ -228,31 +180,10 @@
                         <div class="premium-features">
                             <h4>O que você terá acesso:</h4>
                             <ul>
-                                <li>Principais narrativas do momento (RWA, IA, Layer 2)</li>
-                                <li>Tokens líderes por narrativa</li>
-                                <li>Gráfico de evolução de tendências</li>
-                                <li>Análises de especialistas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Institutional Adoption -->
-                <div class="analysis-card premium-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-building"></i> Adoção Institucional</h3>
-                        <div class="premium-tag">
-                            <i class="fas fa-crown"></i> Premium
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="premium-features">
-                            <h4>O que você terá acesso:</h4>
-                            <ul>
-                                <li>Lista de investimentos institucionais</li>
-                                <li>Quantias e ativos adquiridos</li>
-                                <li>Notícias de última hora</li>
-                                <li>Índice de adoção global</li>
+                                <li>Principais narrativas atuais</li>
+                                <li>Tokens líderes por tema</li>
+                                <li>Evolução de tendências</li>
+                                <li>Análises especializadas</li>
                             </ul>
                         </div>
                     </div>
@@ -267,9 +198,6 @@
                     <div class="cta-buttons">
                         <a href="#premium" class="premium-button">
                             <i class="fas fa-crown"></i> Assinar Premium
-                        </a>
-                        <a href="#demo" class="demo-button">
-                            <i class="fas fa-play"></i> Ver Demo
                         </a>
                     </div>
                 </div>
